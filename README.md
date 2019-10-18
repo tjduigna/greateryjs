@@ -1,5 +1,10 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+### Style Guide
+
+Not adopting semicolons if possible.
+just don't start a line with \[ or (, that's it
+
 ## Available Scripts
 
 In the project directory, you can run:
