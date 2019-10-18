@@ -14,16 +14,14 @@ import MenuItem from '@material-ui/core/MenuItem';
 class App extends React.Component {
 
   state = {
-    selectedOption: ''
+    dropval: ''
+
   }
 
-  handleChange = (selectedOption) => {
-    this.setState({ selectedOption })
-    if (selectedOption) {
-      console.log(`Selected: ${selectedOption.label}`)
-    }
-    console.log("select dropdown updated")
-    console.log(this.state)
+  handleChange = (obj) => {
+    const dropval = obj.target.value
+    console.log("called handleChange", dropval)
+    this.setState({ dropval })
   }
 
   render() {
@@ -31,12 +29,9 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
           <Router className="App-header" />
-        <Select className="App-header"
-          value={this.state.selectedOption}
+        <Select className="Select-header"
+          value={this.state.dropval}
           onChange={this.handleChange}
           displayEmpty
           name="kind"

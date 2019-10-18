@@ -56,7 +56,8 @@ class Router extends React.Component {
     render() {
         return (
             <div className="Router">
-                <Button variant="contained" onClick={this.onClick}>
+                <Button variant="contained"
+                        onClick={this.onClick}>
                     {this.state.kind}
                 </Button>
             </div>
