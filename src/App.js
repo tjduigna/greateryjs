@@ -5,7 +5,7 @@ import React from 'react'
 import logo from './logo.svg'
 import './App.css'
 
-import Router from './router.js'
+import Router from './router.jsx'
 
 
 class App extends React.Component {
@@ -15,12 +15,11 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <Router className="App-header" />
+          <Router />
         </header>
       </div>
     )
   }
 }
-
 
 export default App
