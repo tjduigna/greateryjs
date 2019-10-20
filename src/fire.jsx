@@ -18,12 +18,18 @@ class Fire extends React.Component {
         const { ws, get_state } = this.props
         const route = get_state("route")
         const kind = get_state("kind")
+        const msg = JSON.stringify({
+                "route": route,
+                "kind": kind,
+                "content": "sour apple"
+            })
         console.log(
             "fire ws:", ws,
             "kind:", kind,
             "route:", route,
             "content:", "sour apple"
         )
+        console.log("full msg", msg)
         try {
             ws.send(JSON.stringify({
                 "route": route,

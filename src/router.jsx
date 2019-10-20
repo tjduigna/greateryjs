@@ -42,7 +42,12 @@ class Router extends React.Component {
         }
     }
 
-    componentDidMount() {
+    componentWillUnmount = () => {
+        const { ws } = this.state
+        ws.close()
+    }
+
+    componentDidMount = () => {
         this.connect()
     }
 
@@ -60,28 +65,35 @@ class Router extends React.Component {
         var connectInterval
         ws.onopen = () => {
             console.log("ws client registered")
-            this.setState({ ws: ws })
+            this.setState({ ws })
             that.timeout = 250
             clearTimeout(connectInterval)
         }
-        ws.onmessage = (evt) => {
+        ws.onmessage = evt => {
             const data = JSON.parse(evt.data)
             console.log("ws client from server", data);
-            this.setState({ data })
+            if (data.id) {
+                ws.id = data.id
+            } else {
+                this.setState({ data })
+            }
+            return false
         }
-        ws.onerror = (err) => {
+        ws.onerror = err => {
             console.log("ws errored with")
             console.log(err.message)
             console.log("closing ws")
             ws.close()
         }
-        ws.onclose = (evt) => {
-            let min = Math.min(10000 / 1000, (that.timeout + that.timeout) / 1000)
-            console.log("ws client closed")
-            console.log("trying again in", min, "seconds")
-            console.log(evt.reason)
-            that.timeout = that.timeout + that.timeout
-            connectInterval = setTimeout(this.checkcon, Math.min(10000, that.timeout))
+        ws.onclose = evt => {
+            const max = 30
+            const mil = 1000
+            const backoff = (2 * that.timeout) / mil
+            const minsec = Math.min(max, backoff)
+            console.log("ws closed, trying again in", minsec, "seconds")
+            that.timeout = 2 * that.timeout
+            const minmil = Math.min(max * mil, that.timeout)
+            connectInterval = setTimeout(this.checkcon, minmil)
         }
     }
 

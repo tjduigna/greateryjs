@@ -27,11 +27,17 @@ class Entry extends React.Component {
             const { ws, get_state } = this.props
             const route = get_state("route")
             const kind = get_state("kind")
+            const msg = JSON.stringify({
+                    route: route,
+                    kind: kind,
+                    content: this.state.inpval
+                })
             console.log(
                 "entry send kind:", kind,
                 "route:", route,
                 "content:", this.state.inpval
             )
+            console.log("full msg", msg)
             try {
                 ws.send(JSON.stringify({
                     route: route,
