@@ -3,9 +3,10 @@
 
 import React from "react"
 
-import Fire from './fire.jsx'
-import Entry from './entry.jsx'
-import Dropdown from './dropdown.jsx'
+import Fire from "./fire.jsx"
+import Entry from "./entry.jsx"
+import Dropdown from "./dropdown.jsx"
+import Grid from "./grid.jsx"
 
 class Router extends React.Component {
 
@@ -118,7 +119,7 @@ class Router extends React.Component {
 
     render() {
         return (
-            <div className="Router">
+            <div>
                 <Dropdown value="kind"
                           set_state={this.set_state}
                           menuitems={this.state.kind_options} />
@@ -133,6 +134,7 @@ class Router extends React.Component {
                        get_state={this.get_state} />
                 <Fire ws={this.state.ws}
                       get_state={this.get_state} />
+                <Grid />
             </div>
         )
     }
