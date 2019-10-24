@@ -15,8 +15,8 @@ class Router extends React.Component {
     constructor(props) {
         /* top-level websocket client interface
 
-        state supports route (do this task)
-        and kind (for this data) concepts
+        state supports route (perform this task)
+        and kind (on this data) concepts
         and their respective options as well
         as maintains the websocket client
         connection which has naive reconnect
@@ -27,6 +27,7 @@ class Router extends React.Component {
         const kind = "ingredient"
         this.state = {
             ws: null,
+            wsurl: "ws://localhost:5000/socket",
             kind_options: [
                 {"id": 0, "value": kind},
                 {"id": 1, "value": "recipe"},
@@ -37,19 +38,51 @@ class Router extends React.Component {
                 {"id": 1, "value": "fetch"},
                 {"id": 2, "value": "write"}
             ],
+            columns: {
+                fetch: [
+                    {key: 'id', name: 'Id'},
+                    {key: 'name', name: 'Name'},
+                    {key: 'desc', name: 'Description'}
+                ],
+                model: [
+                    {key: 'id', name: 'Id'},
+                    {key: 'guess', name: 'Input'},
+                    {key: 'conf', name: 'Confidence'},
+                    {key: 'check', name: 'Entity'}
+                ]
+            },
             kind: kind,
             route: route,
-            data: []
+            data: [
+                {id: 0, name: 'row1', desc: 20},
+                {id: 1, name: 'row2', desc: 40},
+                {id: 2, name: 'row3', desc: 60}
+            ]
         }
     }
 
-    componentWillUnmount = () => {
-        const { ws } = this.state
-        ws.close()
-    }
+    //componentWillUnmount = () => {
+    //    const { ws } = this.state
+    //    ws.close()
+    //}
 
     componentDidMount = () => {
         this.connect()
+    }
+
+    heartbeat = () => {
+        /* register a heartbeat
+
+        support a heartbeat from the client
+        as well as from the server for debugging
+        purposes
+        */
+        console.log("hit heartbeat")
+        const { ws } = this.state
+        if (ws && ws.readyState === ws.OPEN) {
+            console.log("sending heartbeat")
+
+        }
     }
 
     connect = () => {
@@ -61,7 +94,7 @@ class Router extends React.Component {
         which increases on back-to-back failure up
         to 10 seconds
         */
-        var ws = new WebSocket("ws://localhost:5000/socket")
+        var ws = new WebSocket(this.state.wsurl)
         let that = this
         var connectInterval
         ws.onopen = () => {
@@ -69,7 +102,12 @@ class Router extends React.Component {
             this.setState({ ws })
             that.timeout = 250
             clearTimeout(connectInterval)
+            //setInterval(function() {
+            //    console.log("sending heartbeat")
+            //    ws.send("heartbeat from client")
+            //}, 5000)
         }
+
         ws.onmessage = evt => {
             const data = JSON.parse(evt.data)
             console.log("ws client from server", data);
@@ -82,7 +120,7 @@ class Router extends React.Component {
         }
         ws.onerror = err => {
             console.log("ws errored with")
-            console.log(err.message)
+            console.log(err, err.message)
             console.log("closing ws")
             ws.close()
         }
@@ -134,10 +172,11 @@ class Router extends React.Component {
                        get_state={this.get_state} />
                 <Fire ws={this.state.ws}
                       get_state={this.get_state} />
-                <Grid />
+                <Grid get_state={this.get_state} />
             </div>
         )
     }
 }
 
+                // columns={this.state.columns}
 export default Router

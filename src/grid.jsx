@@ -11,27 +11,15 @@ import TableRow from '@material-ui/core/TableRow'
 
 class Grid extends React.Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            columns: [
-                {key: 'id', name: 'ID'},
-                {key: 'title', name: 'Title'},
-                {key: 'count', name: 'Count'}
-            ],
-            rows: [
-                {id: 0, title: 'row1', count: 20},
-                {id: 1, title: 'row1', count: 40},
-                {id: 2, title: 'row1', count: 60}
-            ]
-        }
-    }
-
     itercols = () => {
+        const { get_state } = this.props
+        const route = get_state("route")
+        const cols = get_state("columns")
         return (
-            this.state.columns.map((col) =>
+            cols[route].map(col =>
                 <TableCell key={col.key}
-                           value={col.name}>
+                           value={col.name}
+                           style={{ fontWeight: 'bold' }}>
                     {col.name}
                     </TableCell>
             )
@@ -39,13 +27,16 @@ class Grid extends React.Component {
     }
 
     iterrows = () => {
+        const { get_state } = this.props
+        const route = get_state("route")
+        const cols = get_state("columns")
+        const rows = get_state("data")
         return (
-            this.state.columns.map((col) =>
-                <TableRow key={col.key}
-                          value={col.name}>
+            rows.map(row =>
+                <TableRow key={row.id}>
                 {
-                this.state.rows.map((row) =>
-                    <TableCell key={row.key}
+                cols[route].map(col =>
+                    <TableCell key={col.key}
                                value={row[col.key]}>
                         {row[col.key]}
                         </TableCell>
