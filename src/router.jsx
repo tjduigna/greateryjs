@@ -49,15 +49,12 @@ class Router extends React.Component {
                     {key: 'guess', name: 'Input'},
                     {key: 'conf', name: 'Confidence'},
                     {key: 'check', name: 'Entity'}
-                ]
+                ],
+                write: []
             },
             kind: kind,
             route: route,
-            data: [
-                {id: 0, name: 'row1', desc: 20},
-                {id: 1, name: 'row2', desc: 40},
-                {id: 2, name: 'row3', desc: 60}
-            ]
+            data: []
         }
     }
 

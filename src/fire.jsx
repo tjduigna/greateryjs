@@ -23,12 +23,6 @@ class Fire extends React.Component {
             "kind": kind,
             "content": "sour apple"
         })
-//        console.log(
-//            "fire ws:", ws,
-//            "kind:", kind,
-//            "route:", route,
-//            "content:", "sour apple"
-//        )
         console.log("full msg", msg)
         try {
             ws.send(msg)
