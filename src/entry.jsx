@@ -20,34 +20,20 @@ class Entry extends React.Component {
         from parent and sends current value of
         input field
 
-        Note:
-            currently limited to fire on enter key only
         */
-        if (evt.keyCode === 13) {
-            const { ws, get_state } = this.props
-            const route = get_state("route")
-            const kind = get_state("kind")
-            const msg = JSON.stringify({
-                    route: route,
-                    kind: kind,
-                    content: this.state.inpval
-                })
-            console.log(
-                "entry send kind:", kind,
-                "route:", route,
-                "content:", this.state.inpval
-            )
-            console.log("full msg", msg)
-            try {
-                ws.send(JSON.stringify({
-                    route: route,
-                    kind: kind,
-                    content: this.state.inpval
-                }))
-                console.log("sent message")
-            } catch (error) {
-                console.log(error)
-            }
+        const { ws, get_state } = this.props
+        const route = get_state("route")
+        const kind = get_state("kind")
+        const msg = JSON.stringify({
+            route: route,
+            kind: kind,
+            content: this.state.inpval
+        })
+        console.log("full msg", msg)
+        try {
+            ws.send(msg)
+        } catch (e) {
+            console.log(e.message)
         }
     }
 
