@@ -40,9 +40,9 @@ class Router extends React.Component {
             ],
             columns: {
                 fetch: [
-                    {key: 'id', name: 'Id'},
-                    {key: 'name', name: 'Name'},
-                    {key: 'desc', name: 'Description'}
+                    {key: 'id', name: 'Id', editable: false},
+                    {key: 'name', name: 'Name', editable: true},
+                    {key: 'desc', name: 'Description', editable: true}
                 ],
                 model: [
                     {key: 'id', name: 'Id'},
@@ -169,7 +169,8 @@ class Router extends React.Component {
                        get_state={this.get_state} />
                 <Fire ws={this.state.ws}
                       get_state={this.get_state} />
-                <Grid get_state={this.get_state} />
+                <Grid get_state={this.get_state}
+                      set_state={this.set_state} />
             </div>
         )
     }
