@@ -2,12 +2,18 @@
 // Distributed under the terms of the Apache License 2.0
 
 import React from 'react'
-
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import logo from "./logo.svg"
-// import fetch from 'fetch'
+
+import Amplify, { Auth } from 'aws-amplify'
+import awsconfig from './aws-exports.js'
+
+Amplify.configure(awsconfig)
+
+const cfg = Auth.configure()
+console.log(cfg)
 
 const useStyles = makeStyles(theme => ({
     house: {
@@ -27,6 +33,7 @@ export default function Login(props) {
     const theme = useTheme()
     const [username, setUsername] = React.useState('')
     const [password, setPassword] = React.useState('')
+    const [user, setUser] = React.useState('')
 
     const updateUsername = (evt) => {
         setUsername(evt.target.value)
@@ -35,28 +42,33 @@ export default function Login(props) {
         setPassword(evt.target.value)
     }
 
-    console.log(username, password)
 
     const tryLogin = () => {
-        fetch('http://localhost:5000/login', {
-            method: 'POST',
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers": "*",
-                "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS", //"POST, GET, OPTIONS",
-                "Access-Control-Request-Headers": "Origin, Content-Type, Accept",
-            },
-            credentials: "same-origin",
-            body: JSON.stringify({
-                username: username,
-                password: password,
-            })
-        }).then(response => {
-            console.log(response)
-        }).catch(console.error)
+        const user = Auth.signIn(username, password)
+        console.log(user)
+        setUser(user)
+        return user
     }
+
+    console.log(user)
+//        fetch('http://localhost:5000/login', {
+//            method: 'POST',
+//            headers: {
+//                "Accept": "application/json",
+//                "Content-Type": "application/json",
+//                "Access-Control-Allow-Origin": "*",
+//                "Access-Control-Allow-Headers": "*",
+//                "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS", //"POST, GET, OPTIONS",
+//                "Access-Control-Request-Headers": "Origin, Content-Type, Accept",
+//            },
+//            credentials: "same-origin",
+//            body: JSON.stringify({
+//                username: username,
+//                password: password,
+//            })
+//        }).then(response => {
+//            console.log(response)
+//        }).catch(console.error)
 
     return (
         <div className={classes.house}>

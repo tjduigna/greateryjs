@@ -1,0 +1,27 @@
+// Copright (c) 2019 Greatery Development Team
+// Distributed under the terms of the Apache License 2.0
+
+export default awsconfig = {
+    Auth: {
+        identityPoolId: 'us-east-1_vg3W8eT4m',
+
+        identityPoolRegion: 'us-east-1',
+
+//        appClientId: '2b268cp3eocdvhad8e9d7gcp',
+//
+//        mandatorySignIn: false,
+//
+//        cookieStorage: {
+//
+//            domain: 'greateryapp.com',
+//
+//            path: '/',
+//
+//            expires: 30,
+//
+//            secure: true
+//
+//        },
+
+    }
+}
