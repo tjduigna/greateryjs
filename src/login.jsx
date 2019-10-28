@@ -44,31 +44,29 @@ export default function Login(props) {
 
 
     const tryLogin = () => {
-        const user = Auth.signIn(username, password)
-        console.log(user)
-        setUser(user)
-        return user
+//        const user = Auth.signIn(username, password)
+//        console.log(user)
+//        setUser(user)
+//        return user
+        fetch('http://localhost:5000/login', {
+            method: 'POST',
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "*",
+                "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS", //"POST, GET, OPTIONS",
+                "Access-Control-Request-Headers": "Origin, Content-Type, Accept",
+            },
+            credentials: "same-origin",
+            body: JSON.stringify({
+                username: username,
+                password: password,
+            })
+        }).then(response => {
+            console.log(response)
+        }).catch(console.error)
     }
-
-    console.log(user)
-//        fetch('http://localhost:5000/login', {
-//            method: 'POST',
-//            headers: {
-//                "Accept": "application/json",
-//                "Content-Type": "application/json",
-//                "Access-Control-Allow-Origin": "*",
-//                "Access-Control-Allow-Headers": "*",
-//                "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS", //"POST, GET, OPTIONS",
-//                "Access-Control-Request-Headers": "Origin, Content-Type, Accept",
-//            },
-//            credentials: "same-origin",
-//            body: JSON.stringify({
-//                username: username,
-//                password: password,
-//            })
-//        }).then(response => {
-//            console.log(response)
-//        }).catch(console.error)
 
     return (
         <div className={classes.house}>
