@@ -8,7 +8,7 @@ import Entry from "./entry.jsx"
 import Dropdown from "./dropdown.jsx"
 import Grid from "./grid.jsx"
 
-class Router extends React.Component {
+class WsRouter extends React.Component {
 
     timeout = 250
 
@@ -177,4 +177,4 @@ class Router extends React.Component {
 }
 
                 // columns={this.state.columns}
-export default Router
+export default WsRouter

@@ -5,7 +5,17 @@ import React from "react"
 // import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 
+import {
+    // BrowserRouter,
+    BrowserRouter as Router,
+    Switch,
+    Route
+    // useHistory
+} from "react-router-dom"
+// import { withRouter } from "react-router"
+
 import Login from './login.jsx'
+import WsRouter from './router.jsx'
 
 // Rename Router to Socket or something 
 // to disambiguate with react-router duh
@@ -35,11 +45,21 @@ const useStyles = makeStyles(theme => ({
 export default function App() {
     const classes = useStyles()
     const theme = useTheme()
+    // const history = useHistory()
 
     return (
         <div className={classes.app}>
-            <Login />
-        </div>
+            <Router>
+            <Switch>
+                <Route path="/">
+                    <Login />
+                    </Route>
+                <Route path="/home">
+                    <WsRouter />
+                    </Route>
+                </Switch>
+            </Router>
+            </div>
     )
 }
 

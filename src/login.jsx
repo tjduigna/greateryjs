@@ -6,6 +6,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import logo from "./logo.svg"
+import { useHistory } from "react-router"
 
 const useStyles = makeStyles(theme => ({
     house: {
@@ -25,7 +26,7 @@ export default function Login(props) {
     const theme = useTheme()
     const [username, setUsername] = React.useState('')
     const [password, setPassword] = React.useState('')
-    const [user, setUser] = React.useState('')
+    let history = useHistory()
 
     const updateUsername = (evt) => {
         setUsername(evt.target.value)
@@ -43,7 +44,7 @@ export default function Login(props) {
                 "Content-Type": "application/json",
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Headers": "*",
-                "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS", //"POST, GET, OPTIONS",
+                "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
                 "Access-Control-Request-Headers": "Origin, Content-Type, Accept",
             },
             credentials: "same-origin",
@@ -52,7 +53,14 @@ export default function Login(props) {
                 password: password,
             })
         }).then(response => {
-            console.log(response)
+            const resp = response.json()
+            resp.then(obj => {
+                // console.log(obj)
+                if (obj.authorized) {
+                    // console.log("pushing home")
+                    history.push("/home")
+                }
+            })
         }).catch(console.error)
     }
 
