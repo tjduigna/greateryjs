@@ -2,13 +2,9 @@
 // Distributed under the terms of the Apache License 2.0
 
 import React from "react"
+import Layout from "./layout"
 
-import Fire from "./fire.jsx"
-import Entry from "./entry.jsx"
-import Dropdown from "./dropdown.jsx"
-import Grid from "./grid.jsx"
-
-class WsRouter extends React.Component {
+class WS extends React.Component {
 
     timeout = 250
 
@@ -25,19 +21,10 @@ class WsRouter extends React.Component {
         super(props)
         const route = "model"
         const kind = "ingredient"
+        const updatable = false
         this.state = {
             ws: null,
             wsurl: "ws://localhost:5000/socket",
-            kind_options: [
-                {"id": 0, "value": kind},
-                {"id": 1, "value": "recipe"},
-                {"id": 2, "value": "meal"}
-            ],
-            route_options: [
-                {"id": 0, "value": route},
-                {"id": 1, "value": "fetch"},
-                {"id": 2, "value": "write"}
-            ],
             columns: {
                 fetch: [
                     {key: 'id', name: 'Id', editable: false},
@@ -126,7 +113,8 @@ class WsRouter extends React.Component {
             const mil = 1000
             const backoff = (2 * that.timeout) / mil
             const minsec = Math.min(max, backoff)
-            console.log("ws closed, trying again in", minsec, "seconds")
+            console.log("ws closed, trying again in",
+                        minsec, "seconds")
             that.timeout = 2 * that.timeout
             const minmil = Math.min(max * mil, that.timeout)
             connectInterval = setTimeout(this.checkcon, minmil)
@@ -154,27 +142,11 @@ class WsRouter extends React.Component {
 
     render() {
         return (
-            <div>
-                <Dropdown value="kind"
-                          set_state={this.set_state}
-                          menuitems={this.state.kind_options} />
-                <Dropdown value="route"
-                          set_state={this.set_state}
-                          menuitems={this.state.route_options} />
-                <Entry value="name"
-                       ws={this.state.ws}
-                       get_state={this.get_state} />
-                <Entry value="desc"
-                       ws={this.state.ws}
-                       get_state={this.get_state} />
-                <Fire ws={this.state.ws}
-                      get_state={this.get_state} />
-                <Grid get_state={this.get_state}
-                      set_state={this.set_state} />
-            </div>
+            <Layout set_state={this.set_state}
+                    get_state={this.get_state}
+                    ws={this.state.ws} />
         )
     }
 }
 
-                // columns={this.state.columns}
-export default WsRouter
+export default WS

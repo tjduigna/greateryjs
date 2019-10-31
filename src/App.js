@@ -2,39 +2,16 @@
 // Distributed under the terms of the Apache License 2.0
 
 import React from "react"
-// import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import AuthProvider from './auth'
+import Login from './login'
+import WS from './ws'
 
-import {
-    // BrowserRouter,
-    BrowserRouter as Router,
-    Switch,
-    Route
-    // useHistory
-} from "react-router-dom"
-// import { withRouter } from "react-router"
-
-import Login from './login.jsx'
-import WsRouter from './router.jsx'
-
-// Rename Router to Socket or something 
-// to disambiguate with react-router duh
-// import Router from "./router.jsx"
-
-
-      /*
-import PersistentDrawerLeft from './drawer.jsx'
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-        </header>
-        <PersistentDrawerLeft />
-      </div>
-      */
 
 const useStyles = makeStyles(theme => ({
     app: {
-        backgroundColor: '#686c74',
+        backgroundColor: '#787c84',
         display: 'flex',
         height: '100vh',
         width: '100vw',
@@ -42,89 +19,21 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-export default function App() {
+
+export default function App(props) {
     const classes = useStyles()
     const theme = useTheme()
-    // const history = useHistory()
-
     return (
         <div className={classes.app}>
-            <Router>
-            <Switch>
-                <Route path="/">
-                    <Login />
-                    </Route>
-                <Route path="/home">
-                    <WsRouter />
-                    </Route>
-                </Switch>
-            </Router>
+            <BrowserRouter>
+                <AuthProvider>
+                <Switch>
+                    <Route path="/home" component={WS} />
+                    <Route path="/" component={Login} />
+                    </Switch>
+                </AuthProvider>
+                </BrowserRouter>
             </div>
     )
+    // add a 404
 }
-
-
-//import {
-//  BrowserRouter as Router,
-//  Switch,
-//  Route,
-//  Link
-//} from "react-router-dom";
-//
-//        //style={{ float: 'left' }}>
-//
-//export default function App() {
-//  return (
-//    <Router>
-//      <div style={{
-//          display: 'flex',
-//          flexDirection: 'row'
-//      }}>
-//        <div>
-//        <img src={logo} />
-//        <nav>
-//          <ul>
-//            <li>
-//              <Link to="/">Home</Link>
-//            </li>
-//            <li>
-//              <Link to="/about">About</Link>
-//            </li>
-//            <li>
-//              <Link to="/users">Users</Link>
-//            </li>
-//          </ul>
-//        </nav>
-//        </div>
-//
-//        {/* A <Switch> looks through its children <Route>s and
-//            renders the first one that matches the current URL. */}
-//        <div>
-//        <Switch>
-//          <Route path="/about">
-//            <About />
-//          </Route>
-//          <Route path="/users">
-//            <Users />
-//          </Route>
-//          <Route path="/">
-//            <Home />
-//          </Route>
-//        </Switch>
-//        </ div>
-//      </div>
-//    </Router>
-//  );
-//}
-//
-//function Home() {
-//  return <h2>Home</h2>;
-//}
-//
-//function About() {
-//  return <h2>About</h2>;
-//}
-//
-//function Users() {
-//  return <h2>Users</h2>;
-//}
