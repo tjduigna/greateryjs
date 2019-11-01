@@ -3,6 +3,7 @@
 
 import React from "react"
 import ReactDataGrid from 'react-data-grid'
+// import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 class Grid extends React.Component {
@@ -43,8 +44,7 @@ class Grid extends React.Component {
                            rowsCount={rows.length}
                            minHeight={500}
                            onGridRowsUpdated={this.update_data}
-                           enableCellSelect={true}
-                           />
+                           enableCellSelect={true} />
         )
     }
 

@@ -5,7 +5,7 @@ import React from 'react'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import logo from "./static/logo.svg"
+import logo from "../static/logo.svg"
 import { useHistory } from 'react-router-dom'
 import { useAuth } from './auth'
 
