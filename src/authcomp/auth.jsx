@@ -7,21 +7,30 @@ import React, {
     useState
 } from 'react'
 
-const noop = () => {}
-const AuthContext = createContext({
-    user: null,
-    login: noop,
-    logout: noop
-})
+/*  An authentication context that will provide
+    an authenticated user name to downstream
+    components. Public API should only need
+    to leverage useAuth
+*/
 
-const AuthProvider = props => {
-    const [user, setUser] = useState(null)
-    const login = user => setUser(user)
-    const logout = () => setUser(null)
+export const AuthContext = createContext()
 
+export const AuthConsumer = AuthContext.Consumer
+
+function AuthProvider(props) {
+    const [user, setUser] = useState('guest')
+    const [isAuth, setIsAuth] = useState(false)
+    const login = (user) => {
+        setUser(user)
+        setIsAuth(true)
+    }
+    const logout = () => {
+        setUser('guest')
+        setIsAuth(false)
+    }
     return <AuthContext.Provider value={{
-            user, login, logout
-        }} {...props} />
+            user, isAuth, login, logout
+        }} { ...props } />
 }
 
 export default AuthProvider

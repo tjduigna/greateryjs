@@ -2,9 +2,8 @@
 // Distributed under the terms of the Apache License 2.0
 
 import React from 'react'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
-
 import Button from '@material-ui/core/Button'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
 import { useHistory } from 'react-router-dom'
 import { useAuth } from './auth'
 
@@ -16,14 +15,14 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-
 export default function Logout(props) {
     const classes = useStyles()
     const theme = useTheme()
-    // const { login } = useAuth()
     let history = useHistory()
+    let auth = useAuth()
 
     const logout = () => {
+        auth.logout()
         history.push('/')
         history.goForward()
     }
@@ -32,6 +31,8 @@ export default function Logout(props) {
         <Button className={classes.logout}
                 onClick={logout}
                 variant="outlined"
-                margin="dense">Logout</Button>
+                margin="dense">
+                    Logout
+                </Button>
     )
 }

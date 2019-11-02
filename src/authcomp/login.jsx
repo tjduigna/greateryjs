@@ -2,10 +2,10 @@
 // Distributed under the terms of the Apache License 2.0
 
 import React from 'react'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import logo from "../static/logo.svg"
+import { makeStyles, useTheme } from '@material-ui/core/styles'
 import { useHistory } from 'react-router-dom'
 import { useAuth } from './auth'
 
@@ -15,8 +15,8 @@ const useStyles = makeStyles(theme => ({
         width: '40vmin',
         margin: 'auto',
     },
-    input: {
-        display: 'flex',
+    items: {
+        margin: theme.spacing(0.5),
     },
 }))
 
@@ -26,9 +26,14 @@ export default function Login(props) {
     const theme = useTheme()
     const [username, setUsername] = React.useState('')
     const [password, setPassword] = React.useState('')
-    const { login } = useAuth()
     let history = useHistory()
+    let auth = useAuth()
 
+    const input_props = {
+        variant: "outlined",
+        margin: "dense",
+        fullWidth: true
+    }
     const updateUsername = (evt) => {
         setUsername(evt.target.value)
     }
@@ -61,7 +66,7 @@ export default function Login(props) {
             const resp = response.json()
             resp.then(obj => {
                 if (obj.authorized) {
-                    login()
+                    auth.login(username)
                     history.push('/home')
                     history.goForward()
                 }
@@ -72,21 +77,19 @@ export default function Login(props) {
     return (
         <div className={classes.house}>
             <img src={logo} />
-            <TextField variant="outlined"
-                       margin="dense"
+            <TextField { ...input_props }
+                       className={classes.items}
                        label="Username"
                        onChange={updateUsername}
-                       className={classes.input} />
-            <TextField variant="outlined"
-                       margin="dense"
+                       onKeyDown={hitEnter} />
+            <TextField { ...input_props }
+                       className={classes.items}
                        label="Password"
                        type="password"
                        onChange={updatePassword}
-                       onKeyDown={hitEnter}
-                       className={classes.input} />
-            <Button variant="outlined"
-                    margin="dense"
-                    fullWidth={true}
+                       onKeyDown={hitEnter} />
+            <Button { ...input_props }
+                    className={classes.items}
                     onClick={tryLogin}>
                     Login
                     </Button>

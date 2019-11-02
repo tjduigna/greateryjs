@@ -24,6 +24,7 @@ const useStyles = makeStyles(theme => ({
     grid: {
         backgroundColor: '#787c84',
         //flexDirection: 'row',
+        height: '50%',
         position: 'fixed',
         width: '100%',
         bottom: '0px'
