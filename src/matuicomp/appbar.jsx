@@ -14,6 +14,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 // import Button from '@material-ui/core/Button'
 import Logout from '../authcomp/logout'
 import { useHistory } from 'react-router-dom'
+import { useAuth } from '../authcomp/auth'
 
 
 // TODO : fix me
@@ -47,6 +48,8 @@ const useStyles = makeStyles(theme => ({
 export default function MyAppBar(props) {
     const classes = useStyles()
     const theme = useTheme()
+    const { isAuth } = useAuth()
+//    let auth = useAuth()
 
     return (
         <AppBar position="fixed"
@@ -55,18 +58,24 @@ export default function MyAppBar(props) {
                     [classes.appBarShift]: props.open,
                 })} >
             <Toolbar>
-                <IconButton color="inherit"
-                            aria-label="open drawer"
-                            onClick={props.handleDrawerOpen}
-                            edge="start"
-                            className={clsx(classes.menuButton,
-                                            props.open && classes.hide)} >
-                        <MenuIcon />
-                    </IconButton>
+                { isAuth ?
+                    <IconButton color="inherit"
+                                aria-label="open drawer"
+                                onClick={props.handleDrawerOpen}
+                                edge="start"
+                                className={clsx(classes.menuButton,
+                                                props.open && classes.hide)} >
+                            <MenuIcon />
+                        </IconButton>
+                    : null
+                }
                 <Typography variant="h6" noWrap style={{ flex: 1 }}>
                     grEatery
                     </Typography>
-                <Logout />
+                { isAuth ?
+                    <Logout />
+                    : null
+                }
                 </Toolbar>
             </AppBar>
     )

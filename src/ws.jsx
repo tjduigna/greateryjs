@@ -3,6 +3,7 @@
 
 import React from "react"
 import Layout from "./layout"
+import { useAuth } from './authcomp/auth'
 
 class WS extends React.Component {
 
@@ -22,6 +23,7 @@ class WS extends React.Component {
         const route = "model"
         const kind = "ingredient"
         const updatable = false
+
         this.state = {
             ws: null,
             wsurl: "ws://localhost:5000/socket",
@@ -141,6 +143,7 @@ class WS extends React.Component {
     }
 
     render() {
+
         return (
             <Layout set_state={this.set_state}
                     get_state={this.get_state}
