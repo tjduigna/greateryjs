@@ -74,6 +74,15 @@ export default function Login(props) {
         }).catch(console.error)
     }
 
+    const trySignup = () => {
+        // Pick an auth provider smh.
+    }
+
+    const noLogin = () => {
+        history.push('/home')
+        history.goForward()
+    }
+
     return (
         <div className={classes.house}>
             <img src={logo} />
@@ -92,6 +101,16 @@ export default function Login(props) {
                     className={classes.items}
                     onClick={tryLogin}>
                     Login
+                    </Button>
+            <Button { ...input_props }
+                    className={classes.items}
+                    onClick={trySignup}>
+                    Sign Up
+                    </Button>
+            <Button { ...input_props }
+                    className={classes.items}
+                    onClick={noLogin}>
+                    Guest
                     </Button>
             </div>
     )

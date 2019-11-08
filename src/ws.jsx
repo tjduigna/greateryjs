@@ -3,7 +3,7 @@
 
 import React from "react"
 import Layout from "./layout"
-import { useAuth } from './authcomp/auth'
+// import { useAuth } from './authcomp/auth'
 
 class WS extends React.Component {
 
@@ -27,6 +27,7 @@ class WS extends React.Component {
         this.state = {
             ws: null,
             wsurl: "ws://localhost:5000/socket",
+            content: {},
             columns: {
                 fetch: [
                     {key: 'id', name: 'Id', editable: false},
@@ -46,11 +47,6 @@ class WS extends React.Component {
             data: []
         }
     }
-
-    //componentWillUnmount = () => {
-    //    const { ws } = this.state
-    //    ws.close()
-    //}
 
     componentDidMount = () => {
         this.connect()
@@ -137,17 +133,15 @@ class WS extends React.Component {
     }
 
     set_state = (key, value) => {
-        console.log("router setting state key:",
-            key, "old:", this.state[key], "new:", value)
+        //console.log("router setting state key:",
+        //    key, "old:", this.state[key], "new:", value)
         this.setState({ [key]: value })
     }
 
     render() {
-
         return (
             <Layout set_state={this.set_state}
-                    get_state={this.get_state}
-                    ws={this.state.ws} />
+                    get_state={this.get_state} />
         )
     }
 }

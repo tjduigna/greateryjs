@@ -49,6 +49,8 @@ export default function MyAppBar(props) {
     const classes = useStyles()
     const theme = useTheme()
     const { isAuth } = useAuth()
+    let history = useHistory()
+    console.log(history)
 //    let auth = useAuth()
 
     return (
@@ -73,8 +75,8 @@ export default function MyAppBar(props) {
                     grEatery
                     </Typography>
                 { isAuth ?
-                    <Logout />
-                    : null
+                    <Logout label="Logout" />
+                    : <Logout label="Login" />
                 }
                 </Toolbar>
             </AppBar>

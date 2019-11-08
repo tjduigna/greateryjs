@@ -32,7 +32,7 @@ export default function Logout(props) {
                 onClick={logout}
                 variant="outlined"
                 margin="dense">
-                    Logout
+                    {props.label}
                 </Button>
     )
 }
