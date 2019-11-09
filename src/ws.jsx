@@ -4,6 +4,9 @@
 import React from "react"
 import Layout from "./layout"
 // import { useAuth } from './authcomp/auth'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import MatUI from './matuicomp/matui'
+import Login from './authcomp/login'
 
 class WS extends React.Component {
 
@@ -63,7 +66,6 @@ class WS extends React.Component {
         const { ws } = this.state
         if (ws && ws.readyState === ws.OPEN) {
             console.log("sending heartbeat")
-
         }
     }
 
@@ -123,7 +125,6 @@ class WS extends React.Component {
         /* simple ready check on the websocket
 
         */
-        console.log("checking ws connection")
         const { ws } = this.state
         if (!ws || ws.readyState === WebSocket.CLOSED) this.connect()
     }
@@ -133,17 +134,33 @@ class WS extends React.Component {
     }
 
     set_state = (key, value) => {
-        //console.log("router setting state key:",
-        //    key, "old:", this.state[key], "new:", value)
         this.setState({ [key]: value })
     }
 
     render() {
+        const states = {
+            get_state: this.get_state,
+            set_state: this.set_state
+        }
+
         return (
-            <Layout set_state={this.set_state}
-                    get_state={this.get_state} />
+            <BrowserRouter>
+                <MatUI { ...states } />
+                <Switch>
+                    <Route path="/create" render={(props) =>
+                        <p> Hello world! </p>
+                        } />
+                    <Route path="/home" render={(props) =>
+                        <Layout { ...states } />} />
+                    <Route path="/" component={Login} />
+                    </Switch>
+                </BrowserRouter>
         )
     }
 }
 
 export default WS
+            /*
+            <Layout set_state={this.set_state}
+                    get_state={this.get_state} />
+            */

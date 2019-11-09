@@ -2,10 +2,8 @@
 // Distributed under the terms of the Apache License 2.0
 
 import React from 'react'
-
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
-
 import InputLabel from '@material-ui/core/InputLabel'
 import FormControl from '@material-ui/core/FormControl'
 
@@ -38,14 +36,14 @@ export default function Dropdown(props) {
         <FormControl id="outlined-dense"
                      variant="outlined"
                      margin="dense"
-                     fullWidth={true} >
-            <InputLabel htmlFor="outlined" >
+                     fullWidth={true}>
+            <InputLabel htmlFor="outlined">
                 {props.value}
                 </InputLabel>
             <Select labelWidth={props.value.length * 8}
                     onChange={updateDrop}
-                    value={dropval} >
-                { items() }
+                    value={dropval}>
+                {items()}
                 </Select>
             </FormControl>
     )

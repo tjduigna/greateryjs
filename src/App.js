@@ -3,10 +3,7 @@
 
 import React from "react"
 import { makeStyles, useTheme } from '@material-ui/core/styles'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import AuthProvider from './authcomp/auth'
-import MatUI from './matuicomp/matui'
-import Login from './authcomp/login'
 import WS from './ws'
 
 
@@ -26,15 +23,9 @@ export default function App(props) {
     const theme = useTheme()
     return (
         <div className={classes.app}>
-            <BrowserRouter>
-                <AuthProvider>
-                <MatUI />
-                <Switch>
-                    <Route path="/home" component={WS} />
-                    <Route path="/" component={Login} />
-                    </Switch>
+            <AuthProvider>
+                <WS />
                 </AuthProvider>
-                </BrowserRouter>
             </div>
     )
     // add a 404

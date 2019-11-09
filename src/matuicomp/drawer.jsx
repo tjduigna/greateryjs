@@ -42,6 +42,16 @@ const useStyles = makeStyles(theme => ({
 export default function MyDrawer(props) {
     const classes = useStyles()
     const theme = useTheme()
+    const items = [
+        {"id": 0, "value": "Home", "kind": ""},
+        {"id": 1, "value": "Ingredients", "kind": "ingredient"},
+        {"id": 2, "value": "Home", "kind": "recipe"},
+        {"id": 3, "value": "Home", "kind": "meal"},
+    ]
+
+    const set_route = (route) => {
+
+    }
 
     return (
         <Drawer className={classes.drawer}
@@ -56,10 +66,11 @@ export default function MyDrawer(props) {
                 </div>
             <Divider />
             <List>
-                {['Home', 'Ingredients', 'Recipes', 'Meals'].map((text, index) => (
-                    <ListItem button key={text}>
+                {items.map(obj => (
+                    <ListItem button key={obj.id}
+                              onClick={set_route}>
                         <ListItemIcon><ChevronRightIcon /></ListItemIcon>
-                        <ListItemText primary={text} />
+                        <ListItemText primary={obj.value} />
                         </ListItem>
                 ))}
                 </List>

@@ -5,13 +5,13 @@ import React from 'react'
 import clsx from 'clsx'
 
 import { makeStyles, useTheme } from '@material-ui/core/styles'
-
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import MenuIcon from '@material-ui/icons/Menu'
 // import Button from '@material-ui/core/Button'
+
 import Logout from '../authcomp/logout'
 import { useHistory } from 'react-router-dom'
 import { useAuth } from '../authcomp/auth'
@@ -74,9 +74,9 @@ export default function MyAppBar(props) {
                 <Typography variant="h6" noWrap style={{ flex: 1 }}>
                     grEatery
                     </Typography>
-                { isAuth ?
-                    <Logout label="Logout" />
-                    : <Logout label="Login" />
+                { isAuth ? <Logout label="Logout" />
+                    : history.location.pathname === '/' ? null
+                        : <Logout label="Login" />
                 }
                 </Toolbar>
             </AppBar>
