@@ -3,67 +3,29 @@
 
 import React from "react"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
-
-import Dropdowns from "./usercomp/dropdowns"
-import Entries from "./usercomp/entries"
-import Fire from "./usercomp/fire"
-import Grid from "./usercomp/grid"
-
-
-const useStyles = makeStyles(theme => ({
-    box: {
-    },
-    controls: {
-        width: '40vmin',
-        margin: 'auto',
-        transform: 'translateY(+25%)',
-    },
-    grid: {
-        backgroundColor: '#787c84',
-        //flexDirection: 'row',
-        height: '50%',
-        position: 'fixed',
-        width: '100%',
-        bottom: '0px'
-    },
-}))
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import Home from './home'
+import Search from './search'
+import Create from './create'
+import MatUI from './matuicomp/matui'
+import Login from './authcomp/login'
 
 
 export default function Layout(props) {
-    const classes = useStyles()
-    const theme = useTheme()
-    const kind = "ingredient"
-    const route = "model"
-    const dropdowns = [
-        {"id": 0, "value": "kind", "items": [
-            {"id": 0, "value": kind},
-            {"id": 1, "value": "recipe"},
-            {"id": 2, "value": "meal"}
-        ]},
-        {"id": 1, "value": "route", "items": [
-            {"id": 0, "value": route},
-            {"id": 1, "value": "fetch"},
-            {"id": 2, "value": "write"}
-        ]}
-    ]
-    const entries = [
-        {"id": 0, "value": "name"},
-        {"id": 1, "value": "desc"}
-    ]
+    const { states } = props
 
     return (
-        <div className={classes.box}>
-            <div className={classes.controls}>
-                <Dropdowns dropds={dropdowns}
-                           set_state={props.set_state} />
-                <Entries entries={entries}
-                         set_state={props.set_state} />
-                <Fire get_state={props.get_state} />
-                </div>
-            <div className={classes.grid}>
-            <Grid get_state={props.get_state}
-                  set_state={props.set_state} />
-                </div>
-            </div>
+        <BrowserRouter>
+            <MatUI { ...states } />
+            <Switch>
+                <Route path="/create" render={(props) =>
+                    <Create { ...states } />} />
+                <Route path="/search" render={(props) =>
+                    <Search { ...states } />} />
+                <Route path="/home" render={(props) =>
+                    <Home { ...states } />} />
+                <Route path="/" component={Login} />
+                </Switch>
+            </BrowserRouter>
     )
 }

@@ -10,7 +10,8 @@ import React, {
 /*  An authentication context that will provide
     an authenticated user name to downstream
     components. Public API should only need
-    to leverage useAuth
+    to leverage useAuth in functional components
+    or AuthContext for class components.
 */
 
 export const AuthContext = createContext()

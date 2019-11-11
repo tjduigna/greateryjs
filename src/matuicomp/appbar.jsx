@@ -50,8 +50,6 @@ export default function MyAppBar(props) {
     const theme = useTheme()
     const { isAuth } = useAuth()
     let history = useHistory()
-    console.log(history)
-//    let auth = useAuth()
 
     return (
         <AppBar position="fixed"
@@ -60,17 +58,14 @@ export default function MyAppBar(props) {
                     [classes.appBarShift]: props.open,
                 })} >
             <Toolbar>
-                { isAuth ?
-                    <IconButton color="inherit"
-                                aria-label="open drawer"
-                                onClick={props.handleDrawerOpen}
-                                edge="start"
-                                className={clsx(classes.menuButton,
-                                                props.open && classes.hide)} >
-                            <MenuIcon />
-                        </IconButton>
-                    : null
-                }
+                <IconButton color="inherit"
+                            aria-label="open drawer"
+                            onClick={props.handleDrawerOpen}
+                            edge="start"
+                            className={clsx(classes.menuButton,
+                                            props.open && classes.hide)} >
+                        <MenuIcon />
+                    </IconButton>
                 <Typography variant="h6" noWrap style={{ flex: 1 }}>
                     grEatery
                     </Typography>

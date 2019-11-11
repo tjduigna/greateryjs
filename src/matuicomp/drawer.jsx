@@ -16,6 +16,7 @@ import MailIcon from '@material-ui/icons/Mail'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
+import { Link, withRouter } from 'react-router-dom'
 
 // TODO : fix me
 const drawerWidth = 240
@@ -43,15 +44,18 @@ export default function MyDrawer(props) {
     const classes = useStyles()
     const theme = useTheme()
     const items = [
-        {"id": 0, "value": "Home", "kind": ""},
-        {"id": 1, "value": "Ingredients", "kind": "ingredient"},
-        {"id": 2, "value": "Home", "kind": "recipe"},
-        {"id": 3, "value": "Home", "kind": "meal"},
+        {"id": 0, "value": "Home", "route": "/home"},
+        {"id": 1, "value": "Search", "route": "/search"},
+        {"id": 2, "value": "Create", "route": "/create"},
     ]
+//    let history = useHistory()
 
-    const set_route = (route) => {
-
-    }
+//    const set_route = (route) => {
+//        console.log("setting route", route)
+//        history.push(route)
+//        history.goForward()
+//
+//    }
 
     return (
         <Drawer className={classes.drawer}
@@ -67,11 +71,15 @@ export default function MyDrawer(props) {
             <Divider />
             <List>
                 {items.map(obj => (
-                    <ListItem button key={obj.id}
-                              onClick={set_route}>
-                        <ListItemIcon><ChevronRightIcon /></ListItemIcon>
+                    <Link to={obj.route}
+                          key={obj.key}
+                          style={{ color: 'black' }}>
+                    <ListItem button key={obj.id}>
+                        <ListItemIcon><ChevronRightIcon />
+                            </ListItemIcon>
                         <ListItemText primary={obj.value} />
                         </ListItem>
+                        </Link>
                 ))}
                 </List>
             <Divider />

@@ -2,14 +2,12 @@
 // Distributed under the terms of the Apache License 2.0
 
 import React from "react"
+
 import Layout from "./layout"
-// import { useAuth } from './authcomp/auth'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import MatUI from './matuicomp/matui'
-import Login from './authcomp/login'
+import { AuthContext } from './authcomp/auth'
 
 class WS extends React.Component {
-
+    static contextType = AuthContext
     timeout = 250
 
     constructor(props) {
@@ -52,6 +50,8 @@ class WS extends React.Component {
     }
 
     componentDidMount = () => {
+        const user = this.context
+        console.log("component mounted", user)
         this.connect()
     }
 
@@ -142,25 +142,17 @@ class WS extends React.Component {
             get_state: this.get_state,
             set_state: this.set_state
         }
+        // want auth context in the ws
+        // for control-based logic
+        // as well as in downstream components
+        // for auth-based ui logic
+        const { isAuth } = this.context
+        console.log("ws render", isAuth)
 
         return (
-            <BrowserRouter>
-                <MatUI { ...states } />
-                <Switch>
-                    <Route path="/create" render={(props) =>
-                        <p> Hello world! </p>
-                        } />
-                    <Route path="/home" render={(props) =>
-                        <Layout { ...states } />} />
-                    <Route path="/" component={Login} />
-                    </Switch>
-                </BrowserRouter>
+            <Layout states={states} />
         )
     }
 }
 
 export default WS
-            /*
-            <Layout set_state={this.set_state}
-                    get_state={this.get_state} />
-            */
