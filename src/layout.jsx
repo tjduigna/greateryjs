@@ -4,28 +4,80 @@
 import React from "react"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import clsx from 'clsx'
 import Home from './home'
 import Search from './search'
 import Create from './create'
-import MatUI from './matuicomp/matui'
+
+import CssBaseline from '@material-ui/core/CssBaseline'
+import MyAppBar from './matuicomp/appbar'
+import MyDrawer from './matuicomp/drawer'
 import Login from './authcomp/login'
 
 
+const drawerWidth = 240
+
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        display: 'flex',
+    },
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing(3),
+        transition: theme.transitions.create('margin', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+        marginLeft: -drawerWidth,
+    },
+    contentShift: {
+        transition: theme.transitions.create('margin', {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+        marginLeft: 0,
+    },
+}))
+
+
 export default function Layout(props) {
+    const classes = useStyles()
+    const theme = useTheme()
+    const [open, setOpen] = React.useState(false)
+
+    const handleDrawerOpen = () => {
+        setOpen(true)
+    }
+
+    const handleDrawerClose = () => {
+        setOpen(false)
+    }
+
     const { states } = props
 
+            //<MatUI { ...states } />
     return (
         <BrowserRouter>
-            <MatUI { ...states } />
-            <Switch>
-                <Route path="/create" render={(props) =>
-                    <Create { ...states } />} />
-                <Route path="/search" render={(props) =>
-                    <Search { ...states } />} />
-                <Route path="/home" render={(props) =>
-                    <Home { ...states } />} />
-                <Route path="/" component={Login} />
-                </Switch>
+            <div className={classes.root}>
+                <CssBaseline />
+                <MyAppBar handleDrawerOpen={handleDrawerOpen} open={open} />
+                <MyDrawer handleDrawerClose={handleDrawerClose} open={open} />
+                <main className={clsx(classes.content, {
+                    [classes.contentShift]: open,
+                    })} >
+                    <div className={classes.drawerHeader} />
+                <Switch>
+                    <Route path="/create" render={(props) =>
+                        <Create { ...states } />} />
+                    <Route path="/search" render={(props) =>
+                        <Search { ...states } />} />
+                    <Route path="/home" render={(props) =>
+                        <Home { ...states } />} />
+                    <Route path="/" component={Login} />
+                    </Switch>
+                </main>
+                </div>
             </BrowserRouter>
     )
 }

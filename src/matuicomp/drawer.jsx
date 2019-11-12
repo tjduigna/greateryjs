@@ -13,6 +13,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 
 import MailIcon from '@material-ui/icons/Mail'
+import HomeIcon from '@material-ui/icons/Home'
+import SearchIcon from '@material-ui/icons/Search'
+import AddCircleIcon from '@material-ui/icons/AddCircle'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
@@ -44,18 +47,11 @@ export default function MyDrawer(props) {
     const classes = useStyles()
     const theme = useTheme()
     const items = [
-        {"id": 0, "value": "Home", "route": "/home"},
-        {"id": 1, "value": "Search", "route": "/search"},
-        {"id": 2, "value": "Create", "route": "/create"},
+        {"id": 0, "value": "Home", "route": "/home", "icon": HomeIcon},
+        {"id": 1, "value": "Search", "route": "/search", "icon": SearchIcon},
+        {"id": 2, "value": "Create", "route": "/create", "icon": AddCircleIcon},
     ]
-//    let history = useHistory()
 
-//    const set_route = (route) => {
-//        console.log("setting route", route)
-//        history.push(route)
-//        history.goForward()
-//
-//    }
 
     return (
         <Drawer className={classes.drawer}
@@ -75,7 +71,7 @@ export default function MyDrawer(props) {
                           key={obj.key}
                           style={{ color: 'black' }}>
                     <ListItem button key={obj.id}>
-                        <ListItemIcon><ChevronRightIcon />
+                        <ListItemIcon><obj.icon />
                             </ListItemIcon>
                         <ListItemText primary={obj.value} />
                         </ListItem>

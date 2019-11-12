@@ -10,12 +10,13 @@ import Fire from "./usercomp/fire"
 import Grid from "./usercomp/grid"
 
 const useStyles = makeStyles(theme => ({
+    appBarSpacer: theme.mixins.toolbar,
     box: {
         // margin: theme.spacing(10),
         display: 'flex',
         flexDirection: 'column',
-        flexWrap: 'wrap',
-        flex: 1,
+        flexGrow: 1,
+//        flex: 1,
         justifyContent: 'space-between',
 //        alignItems: 'center',
     },
@@ -26,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 //        flex: 1,
 //        justifyContent: 'center',
 //        width: '50%',
-        margin: theme.spacing(10),
+//        margin: theme.spacing(10),
 //        width: '40vmin',
 //        minHeight: '800px',
 //        margin: 'auto',
@@ -76,6 +77,7 @@ export default function Search(props) {
 
     return (
         <div className={classes.box}>
+            <div className={classes.appBarSpacer} />
             <div className={classes.controls}>
                 <Dropdowns dropds={dropdowns}
                            set_state={props.set_state} />

@@ -10,44 +10,18 @@ import Fire from "./usercomp/fire"
 import Grid from "./usercomp/grid"
 
 const useStyles = makeStyles(theme => ({
+    appBarSpacer: theme.mixins.toolbar,
     box: {
-        // margin: theme.spacing(10),
         display: 'flex',
         flexDirection: 'column',
         flexWrap: 'wrap',
         flex: 1,
         justifyContent: 'space-between',
-//        alignItems: 'center',
     },
     controls: {
-//        flexGrow: 0,
-//        flexBasis: 'auto',
-//        flex: 'flex-basis',
-//        flex: 1,
-//        justifyContent: 'center',
-//        width: '50%',
         margin: theme.spacing(10),
-//        width: '40vmin',
-//        minHeight: '800px',
-//        margin: 'auto',
-        // transform: 'translateY(+25%)',
     },
     grid: {
-//        margin: theme.spacing(10),
-//        flexEnd: 1,
-//        maxHeight: "20%",
-//        flex: 'flex-basis',
-//        alignSelf: 'flex-end',
-//        flexShrink: 1,
-//        justifyContent: 'center',
-//        margin: theme.spacing(10),
-//        margin: theme.spacing(10),
-//        backgroundColor: '#787c84',
-//        flexDirection: 'column',
-//        height: '50%',
-//        position: 'fixed',
-//        width: '100%',
-//        bottom: '0px'
     },
 }))
 
@@ -74,6 +48,7 @@ export default function Create(props) {
 
     return (
         <div className={classes.box}>
+            <div className={classes.appBarSpacer} />
             <div className={classes.controls}>
                 <h1>Create {props.get_state("kind")}</h1>
                 <Dropdowns dropds={dropdowns}
@@ -85,9 +60,3 @@ export default function Create(props) {
             </div>
     )
 }
-            /*
-            <div className={classes.grid}>
-            <Grid get_state={props.get_state}
-                  set_state={props.set_state} />
-                </div>
-            */
