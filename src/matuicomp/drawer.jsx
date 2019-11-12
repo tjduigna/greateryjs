@@ -81,10 +81,14 @@ export default function MyDrawer(props) {
             <Divider />
             <List>
                 {['Contact'].map((text, index) => (
+                    <Link to="/contact"
+                          key={text}
+                          style={{ color: 'black' }}>
                     <ListItem button key={text}>
                         <ListItemIcon><MailIcon /></ListItemIcon>
                     <ListItemText primary={text} />
                     </ListItem>
+                    </Link>
                 ))}
                 </List>
             </Drawer>

@@ -7,7 +7,6 @@ import { useAuth } from './authcomp/auth'
 import SimpleCard from './matuicomp/card'
 
 const useStyles = makeStyles(theme => ({
-    appBarSpacer: theme.mixins.toolbar,
     box: {
         display: 'flex',
         flexDirection: 'column',
@@ -19,11 +18,9 @@ export default function Home(props) {
     const classes = useStyles()
     const theme = useTheme()
     let { user } = useAuth()
-    console.log(user)
 
     return (
         <div className={classes.box}>
-            <div className={classes.appBarSpacer} />
             { user ?
                 <h1> Hello {user} </h1>
                 :

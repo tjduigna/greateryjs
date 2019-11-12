@@ -10,45 +10,18 @@ import Fire from "./usercomp/fire"
 import Grid from "./usercomp/grid"
 
 const useStyles = makeStyles(theme => ({
-    appBarSpacer: theme.mixins.toolbar,
     box: {
-        // margin: theme.spacing(10),
         display: 'flex',
         flexDirection: 'column',
         flexGrow: 1,
-//        flex: 1,
         justifyContent: 'space-between',
-//        alignItems: 'center',
     },
     controls: {
-//        flexGrow: 0,
-//        flexBasis: 'auto',
-//        flex: 'flex-basis',
-//        flex: 1,
-//        justifyContent: 'center',
-//        width: '50%',
-//        margin: theme.spacing(10),
-//        width: '40vmin',
-//        minHeight: '800px',
-//        margin: 'auto',
-        // transform: 'translateY(+25%)',
+        margin: 'auto',
+        width: '50%',
     },
     grid: {
-//        margin: theme.spacing(10),
-//        flexEnd: 1,
-//        maxHeight: "20%",
-//        flex: 'flex-basis',
-//        alignSelf: 'flex-end',
-//        flexShrink: 1,
-//        justifyContent: 'center',
-//        margin: theme.spacing(10),
-//        margin: theme.spacing(10),
-//        backgroundColor: '#787c84',
-//        flexDirection: 'column',
-//        height: '50%',
-//        position: 'fixed',
-//        width: '100%',
-//        bottom: '0px'
+        width: '100%',
     },
 }))
 
@@ -77,7 +50,6 @@ export default function Search(props) {
 
     return (
         <div className={classes.box}>
-            <div className={classes.appBarSpacer} />
             <div className={classes.controls}>
                 <Dropdowns dropds={dropdowns}
                            set_state={props.set_state} />

@@ -7,10 +7,8 @@ import { makeStyles, useTheme } from "@material-ui/core/styles"
 import Dropdowns from "./usercomp/dropdowns"
 import Entries from "./usercomp/entries"
 import Fire from "./usercomp/fire"
-import Grid from "./usercomp/grid"
 
 const useStyles = makeStyles(theme => ({
-    appBarSpacer: theme.mixins.toolbar,
     box: {
         display: 'flex',
         flexDirection: 'column',
@@ -19,9 +17,8 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'space-between',
     },
     controls: {
-        margin: theme.spacing(10),
-    },
-    grid: {
+        margin: 'auto',
+        width: '50%',
     },
 }))
 
@@ -48,7 +45,6 @@ export default function Create(props) {
 
     return (
         <div className={classes.box}>
-            <div className={classes.appBarSpacer} />
             <div className={classes.controls}>
                 <h1>Create {props.get_state("kind")}</h1>
                 <Dropdowns dropds={dropdowns}

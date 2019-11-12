@@ -8,6 +8,7 @@ import clsx from 'clsx'
 import Home from './home'
 import Search from './search'
 import Create from './create'
+import Contact from './contact'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
 import MyAppBar from './matuicomp/appbar'
@@ -22,6 +23,7 @@ const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
     },
+    appBarSpacer: theme.mixins.toolbar,
     content: {
         flexGrow: 1,
         padding: theme.spacing(3),
@@ -67,6 +69,7 @@ export default function Layout(props) {
                     [classes.contentShift]: open,
                     })} >
                     <div className={classes.drawerHeader} />
+                <div className={classes.appBarSpacer} />
                 <Switch>
                     <Route path="/create" render={(props) =>
                         <Create { ...states } />} />
@@ -74,6 +77,8 @@ export default function Layout(props) {
                         <Search { ...states } />} />
                     <Route path="/home" render={(props) =>
                         <Home { ...states } />} />
+                    <Route path="/contact" render={(props) =>
+                        <Contact />} />
                     <Route path="/" component={Login} />
                     </Switch>
                 </main>
